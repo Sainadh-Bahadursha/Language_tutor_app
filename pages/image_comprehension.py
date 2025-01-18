@@ -4,7 +4,7 @@ import numpy as np
 import wave
 import openai
 import os
-from streamlit_webrtc import webrtc_streamer, AudioProcessorBase, ClientSettings
+from streamlit_webrtc import webrtc_streamer, AudioProcessorBase, Mode
 from io import BytesIO
 
 # OpenAI API Key setup
@@ -46,7 +46,7 @@ def speech_to_text(audio_data):
 # Function to describe the image (existing)
 def describe_image(image_url):
     response = client.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[{
             "role": "user",
             "content": f"Describe this image like an IELTS exam: {image_url}"
@@ -57,7 +57,7 @@ def describe_image(image_url):
 # Compare the model and user description (existing)
 def compare_descriptions(model_desc, user_desc):
     completion = client.ChatCompletion.create(
-        model="gpt-4",
+        model="gpt-4o-mini",
         messages=[{
             "role": "system",
             "content": "You are a language teacher. You will provide feedback on grammar and vocabulary for the user-provided description of an image."
@@ -93,14 +93,13 @@ def app():
 
         st.subheader("You have 30 seconds to describe the image. Focus on fluency and rich description.")
 
+        # Fixing the mode issue here
         webrtc_ctx = webrtc_streamer(
             key="audio-recorder",
-            mode="sendrecv",
+            mode=Mode.SENDRECV,  # Using enum instead of string
             audio_processor_factory=AudioProcessor,
-            client_settings=ClientSettings(
-                rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
-                media_stream_constraints={"audio": True, "video": False}
-            )
+            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            media_stream_constraints={"audio": True, "video": False}
         )
 
         if webrtc_ctx.audio_receiver:
