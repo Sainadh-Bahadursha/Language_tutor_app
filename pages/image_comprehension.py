@@ -4,7 +4,7 @@ import numpy as np
 import wave
 import openai
 import os
-from streamlit_webrtc import webrtc_streamer, AudioProcessorBase, Mode
+from streamlit_webrtc import webrtc_streamer, AudioProcessorBase
 from io import BytesIO
 
 # OpenAI API Key setup
@@ -93,10 +93,10 @@ def app():
 
         st.subheader("You have 30 seconds to describe the image. Focus on fluency and rich description.")
 
-        # Fixing the mode issue here
+        # Fixing the mode issue by directly using the string values for mode
         webrtc_ctx = webrtc_streamer(
             key="audio-recorder",
-            mode=Mode.SENDRECV,  # Using enum instead of string
+            mode="sendrecv",  # Use string value for mode
             audio_processor_factory=AudioProcessor,
             rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
             media_stream_constraints={"audio": True, "video": False}
