@@ -1,0 +1,8 @@
+streamlit
+openai
+requests
+numpy
+sounddevice
+scipy
+wave
+pandas
