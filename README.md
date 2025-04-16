@@ -14,12 +14,12 @@ An interactive web-based language learning tool powered by **Streamlit** and **O
   - Fill-in-the-blank
   - Multiple Choice Questions (MCQs)
 - Students input their answers.
-- GPT-4o evaluates responses, gives correct answers, and constructive feedback.
+- GPT-4o mini evaluates responses, gives correct answers, and constructive feedback.
 
 ### 3. **Reading & Translation**
-- Presents prompts in a random language (English, French, Spanish, etc.).
+- Presents prompts in a telugu languague.
 - Students are asked to translate them into English.
-- GPT-4o validates the translation and offers corrections with explanations.
+- GPT-4o mini validates the translation and offers corrections with explanations.
 
 ## Tech Stack
 
